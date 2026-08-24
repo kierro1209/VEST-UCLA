@@ -26,6 +26,10 @@ type LeaderboardEntry = {
 
 async function getLeaderboard(): Promise<LeaderboardEntry[]> {
   noStore();
+  if (!supabase) {
+    return [];
+  }
+
   const { data, error } = await supabase
     .from("leaderboard")
     .select("username, points")
@@ -94,5 +98,4 @@ export default async function LeaderboardPage() {
     </div>
   );
 }
-
 
