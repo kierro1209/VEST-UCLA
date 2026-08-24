@@ -8,8 +8,12 @@ Use pnpm 10.14.0 as the package manager.
 
 pnpm 10 blocks dependency lifecycle scripts unless they are explicitly approved.
 If Vercel fails during `pnpm install` with an `approve-builds` message, run
-`pnpm approve-builds` locally, approve the trusted build dependencies, and commit
-the generated `pnpm-workspace.yaml` file before redeploying.
+`pnpm approve-builds` locally and approve `sharp` and `unrs-resolver`. The approved
+dependencies are recorded in `pnpm-workspace.yaml` before redeploying.
 
-README-only changes can trigger a new deployment, but they cannot resolve this
-install-time approval requirement by themselves.
+The repository already records these trusted build dependencies for Vercel.
+
+The leaderboard uses `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_ANON_KEY`. Add both variables to the Vercel project's
+Environment Variables for leaderboard data to appear; without them, the page
+builds and displays an empty-state message.
