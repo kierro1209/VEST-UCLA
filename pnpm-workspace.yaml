@@ -2,5 +2,7 @@ packages:
   - '**'
 
 onlyBuiltDependencies:
+  - '@firebase/util'
+  - protobufjs
   - sharp
   - unrs-resolver

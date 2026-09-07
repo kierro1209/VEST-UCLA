@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient } from "@/lib/supabase";
 import { unstable_noStore as noStore } from "next/cache";
 import {
   Card,
@@ -26,7 +26,11 @@ type LeaderboardEntry = {
 
 async function getLeaderboard(): Promise<LeaderboardEntry[]> {
   noStore();
-  if (!supabase) {
+  let supabase;
+  try {
+    supabase = getSupabaseClient();
+  } catch (err) {
+    console.error("Supabase not configured:", err);
     return [];
   }
 
@@ -98,4 +102,5 @@ export default async function LeaderboardPage() {
     </div>
   );
 }
+
 
